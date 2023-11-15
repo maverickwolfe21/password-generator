@@ -23,11 +23,38 @@ function generatePassword() {
   2. Prompt for including lowercase.
   3. Prompt for including uppercase.
   4. Prompt for including numeric.
-  4. Prompt for including special characters.
-  5. Regenerate prompt if Requirement #1 and/or Requirement #3 is not met.
-  6. Generate password.
-  7. Display on page.
+  5. Prompt for including special characters.
+  6. Regenerate prompt if Requirement #1 and/or Requirement #3 is not met.
+  7. Generate password.
+  8. Display on page.
   */
+
+  // 1. Prompt for desired length.
+  var length = validateLength();
+
+  // 2. Prompt for including lowercase characters.
+  var includeLowerCase = window.confirm("Include lowercase?");
+
+  // 3. Prompt for including uppercase characters.
+  var includeUpperCase = window.confirm("Include uppercase?");
+
+  // 4. Prompt for including numeric characters.
+  var includeNumbers = window.confirm("Include numbers?");
+
+  // 5. Prompt for including special characters.
+  var includeSpecialCharacters = window.confirm("Include special characters?");
+}
+
+// Prompts for length and redisplays if requirements aren't met.
+function validateLength() {
+  var length = window.prompt("Password length (please enter a number between 8-128)", "");
+  if (length === "") {
+    return validateLength();
+  } else if (length < 8 || length > 128) {
+    return validateLength();
+  } else {
+    return length;
+  }
 }
 
 // Add event listener to generate button
