@@ -29,6 +29,8 @@ function writePassword() {
 }
 
 function generatePassword() {
+  var password = "";
+
   // 1. Prompt for desired length.
   var length = validateLength();
 
@@ -54,6 +56,28 @@ function generatePassword() {
 
   // creates string of characters to choose from, used to generate password
   let characterLibrary = "";
+
+  // initialize possibilities based on user inputs
+  if (characters[0]) {
+    characterLibrary += lowerCaseLetters;
+  }
+  if (characters[1]) {
+    characterLibrary += upperCaseLetters;
+  }
+  if (characters[2]) {
+    characterLibrary += numbers;
+  }
+  if (characters[3]) {
+    characterLibrary += specialCharacters;
+  }
+
+  // generate actual password
+  for (let i = 0; i < length; i++) {
+    var randomChar = characterLibrary.charAt(Math.floor(Math.random() * characterLibrary.length));
+    password += randomChar;
+  }
+
+  return password;
 }
 
 // Prompts for length and redisplays if requirements aren't met.
@@ -80,6 +104,14 @@ function validateCharacterTypes(characters) {
   } else {
     return characters;
   }
+}
+
+// Write password to the #password input
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
 }
 
 // Add event listener to generate button
