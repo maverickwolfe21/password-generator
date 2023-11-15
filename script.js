@@ -43,6 +43,11 @@ function generatePassword() {
 
   // 5. Prompt for including special characters.
   var includeSpecialCharacters = window.confirm("Include special characters?");
+
+  // stores user's input values
+  var characters = [includeLowerCase, includeUpperCase, includeNumbers, includeSpecialCharacters];
+  // makes sure at least one of the 4 types is selected
+  characters = validateCharacterTypes(characters);
 }
 
 // Prompts for length and redisplays if requirements aren't met.
@@ -54,6 +59,20 @@ function validateLength() {
     return validateLength();
   } else {
     return length;
+  }
+}
+
+// Checks that at least one of the character types is selected
+function validateCharacterTypes(characters) {
+  if (!characters[0] && !characters[1] && !characters[2] && !characters[3]) {
+    alert("Please include AT LEAST ONE character type (lowercase, uppercase, numbers, special characters)");
+    characters[0] = window.confirm("Include lowercase?");
+    characters[1] = window.confirm("Include uppercase?");
+    characters[2] = window.confirm("Include numbers?");
+    characters[3] = window.confirm("Include special characters?");
+    return validateCharacterTypes(characters);
+  } else {
+    return characters;
   }
 }
 
